@@ -1,6 +1,7 @@
 package htwb.ai.railey;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Hello world!
@@ -13,8 +14,11 @@ public class App
     try {
     	
     	Object classname = TestRunner.createFromSystemProperty(args[4]);
-    	System.out.println(classname);
-    	System.out.println(TestRunner.getMethode(classname));
+    	//System.out.println(classname);
+    	for(Method m : TestRunner.getMethode(classname)) {
+        	//System.out.println(m.getName());
+    	}
+    	TestRunner.test(classname, TestRunner.getMethode(classname));
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

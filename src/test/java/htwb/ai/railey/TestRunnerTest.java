@@ -56,10 +56,14 @@ public class TestRunnerTest {
     public void test_GetMethods1() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
     	Object testedClass = TestRunner.createFromSystemProperty("MyTestClasses.TestClassFromRailey");
     	ArrayList<Method> methods = TestRunner.getMethods(testedClass);
-    	assertEquals(methods.size(), 3);
-    	assertEquals(methods.get(0).toString(), "public boolean MyTestClasses.TestClassFromRailey.testMethod_Return_False()");
-    	assertEquals(methods.get(1).toString(), "public boolean MyTestClasses.TestClassFromRailey.testMethod_Return_True()");
-    	assertEquals(methods.get(2).toString(), "public boolean MyTestClasses.TestClassFromRailey.testMethod_NullPointerException()");
+    	ArrayList<String> methodsToString = new ArrayList<>();
+    	for(Method m : methods) {
+    		methodsToString.add(m.toString());
+    	}
+    	assertEquals(methodsToString.size(), 3);
+    	assertEquals(methodsToString.contains("public boolean MyTestClasses.TestClassFromRailey.testMethod_Return_False()"), true);
+    	assertEquals(methodsToString.contains("public boolean MyTestClasses.TestClassFromRailey.testMethod_Return_True()"), true);
+    	assertEquals(methodsToString.contains("public boolean MyTestClasses.TestClassFromRailey.testMethod_NullPointerException()"), true);
     }
     
     @Test
@@ -95,9 +99,9 @@ public class TestRunnerTest {
     	Object testedClass = TestRunner.createFromSystemProperty("MyTestClasses.TestClassFromRailey");
     	ArrayList<String> messages = TestRunner.testMethodResult(testedClass);
     	assertEquals(messages.size(), 3);
-    	assertEquals(messages.get(0), "Result for 'testMethod_Return_False' : failed");
-    	assertEquals(messages.get(1), "Result for 'testMethod_Return_True' : passed");
-    	assertEquals(messages.get(2), "Result for 'testMethod_NullPointerException' : error due to NullPointerException");
+    	assertEquals(messages.contains("Result for 'testMethod_Return_False' : failed"), true);
+    	assertEquals(messages.contains("Result for 'testMethod_Return_True' : passed"), true);
+    	assertEquals(messages.contains("Result for 'testMethod_NullPointerException' : error due to NullPointerException"), true);
     }
     
     @Test

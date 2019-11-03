@@ -39,7 +39,6 @@ public class App
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
             formatter.printHelp("Options for Parse Arguments:", options);
-            System.exit(1);
 		}
         
         return cmd.getOptionValue("c");	

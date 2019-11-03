@@ -1,46 +1,44 @@
 package htwb.ai.railey;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import org.apache.commons.cli.*;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
-    public static void main( String[] args )
+	public static void main( String[] args )
     {
-    try {
+    	Options options = new Options();
+        
+        Option jar = new Option("jar", true, "testrunner-1.0-jar-with-dependencies.jar");
+        jar.setRequired(true);
+        options.addOption(jar);
     	
-    	Object classname = TestRunner.createFromSystemProperty(args[4]);
-    	//System.out.println(classname);
-    	for(Method m : TestRunner.getMethode(classname)) {
-        	//System.out.println(m.getName());
-    	}
-    	TestRunner.test(classname, TestRunner.getMethode(classname));
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InstantiationException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalArgumentException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InvocationTargetException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (NoSuchMethodException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SecurityException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+        Option tested_class = new Option("c", true, "tested class for test runner");
+        tested_class.setRequired(true);
+        options.addOption(tested_class);
+        
+        CommandLineParser parser = new DefaultParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+        Object classname;
+        
+        try {
+        	cmd = parser.parse(options, args);
+			classname = TestRunner.createFromSystemProperty(cmd.getOptionValue("c"));
+
+	    	TestRunner.testMethodResult(classname, TestRunner.getMethode(classname));
+			
+			
+		} 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		} 
+        catch (ParseException e) {
+            System.out.println(e.getMessage());
+            formatter.printHelp("utility-name", options);
+            System.exit(1);
+        }
     }
     
     public static String returnsHelloWorld() {

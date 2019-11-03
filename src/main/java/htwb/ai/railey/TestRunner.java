@@ -12,19 +12,11 @@ public class TestRunner {
 	        throws ClassNotFoundException, InstantiationException, IllegalAccessException, 
 	        IllegalArgumentException, InvocationTargetException, NoSuchMethodException, 
 	        SecurityException {
-
-		
-        //String className = System.getProperty(classname);
-        
-        
-        //System.out.println("in createFromSystemProperty: " + className);
         Class<?> c = Class.forName(classname);
-        //System.out.println(c.getDeclaredConstructor().newInstance());
         return c.getDeclaredConstructor().newInstance();
     }
 	
 	public static ArrayList<Method> getMethode(Object o){
-		Method[] methode = o.getClass().getDeclaredMethods();
 		return  filterMethods(o.getClass().getDeclaredMethods());
 	}
 	
@@ -41,20 +33,24 @@ public class TestRunner {
 		return  filteredMethods;
 	}
 	
-	public static void test( Object objectToTest, ArrayList<Method> methodsToTest) {
-		System.out.println(" ----- TEST RESULTS FOR "+objectToTest.toString()+" ----- ");
+	public static void testMethodResult(Object testedClass, ArrayList<Method> methodsToTest) {
+		
+		String classname = (String) testedClass.getClass().toString();
+		classname = classname.replace("class MyTestClasses.", "");
+		
+		System.out.println(" ----- TEST RESULTS FOR " + classname + " ----- ");
 		for(Method m : methodsToTest) {
 			try {
-				System.out.print("Result for '"+ m.getName()+ " : ");
-				if((boolean)m.invoke(objectToTest)) {
+				System.out.print("Result for '"+ m.getName()+ "' : ");
+				if((boolean)m.invoke(testedClass)) {
 					System.out.println("passed");
 				}
 				else {
 					System.out.println("failed");
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Error due to NullpointerException");
+			} 
+			catch (Exception e) {
+				System.out.println("error due to NullPointerException");
 			}
 		}
 	}

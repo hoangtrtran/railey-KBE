@@ -12,5 +12,23 @@ public class AppTest {
 		assertEquals("MyTestClasses.TestClassFromRailey", App.getClassNameFromConsole(new String[]{"java","-jar", "testrunner-1.0-jar-with-dependencies-jar", 
 				"-c", "MyTestClasses.TestClassFromRailey"}));
     }
+
+    @Test
+    public void test_getEmptyClassnameFromConsole() {
+		assertEquals("", App.getClassNameFromConsole(new String[]{"java","-jar", "testrunner-1.0-jar-with-dependencies-jar", 
+				"-c", ""}));
+    }
+    
+    @Test
+    public void test_getClassnameWithoutArgumentsFromConsole() {
+		assertEquals("", App.getClassNameFromConsole(new String[]{"java","-jar", "testrunner-1.0-jar-with-dependencies-jar", 
+				"", ""}));
+    }
+
+    @Test
+    public void test_getClassnameTwistedFromConsole() {
+		assertEquals("", App.getClassNameFromConsole(new String[]{"java","-jar", "testrunner-1.0-jar-with-dependencies-jar", 
+				"MyTestClasses.TestClassFromRailey", "-c"}));
+    }
     
 }

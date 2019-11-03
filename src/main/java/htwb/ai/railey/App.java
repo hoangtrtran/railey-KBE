@@ -26,7 +26,7 @@ public class App
         	cmd = parser.parse(options, args);
 			classname = TestRunner.createFromSystemProperty(cmd.getOptionValue("c"));
 
-	    	TestRunner.testMethodResult(classname, TestRunner.getMethode(classname));
+	    	TestRunner.testMethodResult(classname);
 			
 			
 		} 
@@ -40,8 +40,5 @@ public class App
             System.exit(1);
         }
     }
-    
-    public static String returnsHelloWorld() {
-        return "Hello World!";
-    }
+
 }

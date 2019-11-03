@@ -16,7 +16,10 @@ public class TestRunner {
         return c.getDeclaredConstructor().newInstance();
     }
 	
-	public static ArrayList<Method> getMethode(Object o){
+	public static ArrayList<Method> getMethods(Object o){
+		if (o == null)
+			throw new NullPointerException("Null is not allowed.");
+		
 		return  filterMethods(o.getClass().getDeclaredMethods());
 	}
 	
@@ -33,25 +36,33 @@ public class TestRunner {
 		return  filteredMethods;
 	}
 	
-	public static void testMethodResult(Object testedClass, ArrayList<Method> methodsToTest) {
+	public static ArrayList<String> testMethodResult(Object testedClass) {
+		if (testedClass == "" || testedClass == null)
+			throw new IllegalArgumentException("Null or empty string is not allowed");
 		
+		ArrayList<Method> methodsToTest = TestRunner.getMethods(testedClass);
+		ArrayList<String> messages = new ArrayList<>();
 		String classname = (String) testedClass.getClass().toString();
 		classname = classname.replace("class MyTestClasses.", "");
 		
 		System.out.println(" ----- TEST RESULTS FOR " + classname + " ----- ");
 		for(Method m : methodsToTest) {
-			try {
-				System.out.print("Result for '"+ m.getName()+ "' : ");
-				if((boolean)m.invoke(testedClass)) {
-					System.out.println("passed");
-				}
-				else {
-					System.out.println("failed");
-				}
+			String message = "Result for '"+ m.getName()+ "' : ";
+			try {	
+				if((boolean)m.invoke(testedClass))
+					message += "passed";
+				else
+					message += "failed";
+				
+				messages.add(message);
+				System.out.println(message);
 			} 
 			catch (Exception e) {
-				System.out.println("error due to NullPointerException");
+				message += "error due to NullPointerException";
+				messages.add(message);
+				System.out.println(message);
 			}
 		}
+		return messages;
 	}
 }

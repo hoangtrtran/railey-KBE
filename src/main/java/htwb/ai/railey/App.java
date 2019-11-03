@@ -5,9 +5,23 @@ import org.apache.commons.cli.*;
 
 public class App 
 {
-	public static void main( String[] args )
+	public static void main(String[] args )
     {
-    	Options options = new Options();
+        Object classname;
+        
+        try {
+			classname = TestRunner.createFromSystemProperty(getClassNameFromConsole(args));
+	    	TestRunner.testMethodResult(classname);
+		} 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		} 
+    }
+	
+	public static String getClassNameFromConsole(String[] args) {
+		
+		Options options = new Options();
         
         Option jar = new Option("jar", true, "testrunner-1.0-jar-with-dependencies.jar");
         jar.setRequired(true);
@@ -19,26 +33,16 @@ public class App
         
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
-        CommandLine cmd;
-        Object classname;
-        
+        CommandLine cmd = null;
         try {
-        	cmd = parser.parse(options, args);
-			classname = TestRunner.createFromSystemProperty(cmd.getOptionValue("c"));
-
-	    	TestRunner.testMethodResult(classname);
-			
-			
-		} 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		} 
-        catch (ParseException e) {
-            System.out.println(e.getMessage());
-            formatter.printHelp("utility-name", options);
+			cmd = parser.parse(options, args);
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+            formatter.printHelp("Options for Parse Arguments:", options);
             System.exit(1);
-        }
-    }
+		}
+        
+        return cmd.getOptionValue("c");	
+	}
 
 }

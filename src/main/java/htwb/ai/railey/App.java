@@ -5,7 +5,7 @@ import org.apache.commons.cli.*;
 
 public class App 
 {
-	public static void main(String[] args )
+	public static void main(String[] args ) throws Exception
     {
         Object classname;
         
@@ -19,7 +19,7 @@ public class App
 		} 
     }
 	
-	public static String getClassNameFromConsole(String[] args) {
+	public static String getClassNameFromConsole(String[] args) throws Exception {
 		
 		Options options = new Options();
         
@@ -36,9 +36,13 @@ public class App
         CommandLine cmd = null;
         try {
 			cmd = parser.parse(options, args);
+			if (!args[0].equals("java") || !cmd.getOptionValue("jar").equals("testrunner-1.0-jar-with-dependencies.jar") || 
+					cmd.getOptionValue("c").isEmpty() || String.valueOf(cmd.getOptionValue("c").charAt(0)).equals("-"))
+				throw new IllegalArgumentException("Error: Arguments in the console are wrong. "
+						+ "Please put following argument in console: -jar testrunner-1.0-jar-with-dependencies.jar -c classname");
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-            formatter.printHelp("Options for Parse Arguments:", options);
+			formatter.printHelp("Options for Parse Arguments:", options);
+			System.out.println("Please put following argument in console: -jar testrunner-1.0-jar-with-dependencies.jar -c classname");
 		}
         
         return cmd.getOptionValue("c");	

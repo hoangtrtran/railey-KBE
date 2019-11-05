@@ -112,6 +112,13 @@ public class TestRunnerTest {
     }
     
     @Test
+    public void test_TestMethodResult3_UnmatchedRequirement() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    	Object testedClass = TestRunner.createFromSystemProperty("htwb.ai.railey.TestRunner");
+    	ArrayList<String> messages = TestRunner.testMethodResult(testedClass);
+    	assertEquals(messages.size(), 0);
+    }
+    
+    @Test
     public void test_TestMethodResult3_EmptyStringClass() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
     	Assertions.assertThrows(IllegalArgumentException.class, () -> {
     		@SuppressWarnings("unused")

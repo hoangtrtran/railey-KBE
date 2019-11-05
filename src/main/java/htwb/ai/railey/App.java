@@ -22,11 +22,7 @@ public class App
 	public static String getClassNameFromConsole(String[] args) throws Exception {
 		
 		Options options = new Options();
-        
-        Option jar = new Option("jar", true, "testrunner-1.0-jar-with-dependencies.jar");
-        jar.setRequired(true);
-        options.addOption(jar);
-    	
+
         Option tested_class = new Option("c", true, "tested class for test runner");
         tested_class.setRequired(true);
         options.addOption(tested_class);
@@ -36,13 +32,13 @@ public class App
         CommandLine cmd = null;
         try {
 			cmd = parser.parse(options, args);
-			if (!args[0].equals("java") || !cmd.getOptionValue("jar").equals("testrunner-1.0-jar-with-dependencies.jar") || 
-					cmd.getOptionValue("c").isEmpty() || String.valueOf(cmd.getOptionValue("c").charAt(0)).equals("-"))
+			
+			if (cmd.getOptionValue("c").isEmpty() || String.valueOf(cmd.getOptionValue("c").charAt(0)).equals("-"))
 				throw new IllegalArgumentException("Error: Arguments in the console are wrong. "
-						+ "Please put following argument in console: -jar testrunner-1.0-jar-with-dependencies.jar -c classname");
+						+ "Please put following argument in console: java -jar testrunner-1.0-jar-with-dependencies.jar -c classname");
 		} catch (ParseException e) {
 			formatter.printHelp("Options for Parse Arguments:", options);
-			System.out.println("Please put following argument in console: -jar testrunner-1.0-jar-with-dependencies.jar -c classname");
+			System.out.println("Please put following argument in console: java -jar testrunner-1.0-jar-with-dependencies.jar -c classname");
 		}
         
         return cmd.getOptionValue("c");	

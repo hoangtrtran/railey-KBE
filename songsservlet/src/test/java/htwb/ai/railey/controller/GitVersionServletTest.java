@@ -1,4 +1,4 @@
-package htwb.ai.TEAMNAME.controller;
+package htwb.ai.railey.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +12,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletConfig;
 
-import htwb.ai.TEAMNAME.controller.GitVersionServlet;
+import htwb.ai.railey.controller.GitVersionServlet;
 
 public class GitVersionServletTest {
 

@@ -1,10 +1,9 @@
-package htwb.ai.TEAMNAME.controller;
+package htwb.ai.railey.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

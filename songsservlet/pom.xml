@@ -5,7 +5,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<!-- ACHTUNG: 'TEAMNAME' muss von Ihnen angepasst werden -->
-	<groupId>htwb.ai.TEAMNAME</groupId>
+	<groupId>htwb.ai.railey</groupId>
 	<artifactId>songsservlet</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>

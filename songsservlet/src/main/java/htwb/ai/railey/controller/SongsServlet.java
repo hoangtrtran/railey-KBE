@@ -258,6 +258,18 @@ public class SongsServlet extends HttpServlet {
 		return this.uriToDB;
 	}
 	
-	
-	
+	// For testing purpose
+	private static void printFile(File file) throws IOException {
+
+        if (file == null) return;
+
+        try (FileReader reader = new FileReader(file);
+             BufferedReader br = new BufferedReader(reader)) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
+    }
 }

@@ -58,6 +58,21 @@ public class SongsServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+    
+    @Override
+	public void destroy() {
+    	super.destroy();
+    	try{
+        	File file = new File(getClass().getClassLoader().getResource(songsJSONFilePath).getFile());
+       		FileWriter fstream = new FileWriter(file,false);
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write(uriToDB.toString());
+            out.close();
+        }
+        catch (IOException e){
+        	e.printStackTrace();
+        }
+    }
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

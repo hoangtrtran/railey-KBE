@@ -5,7 +5,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<!-- ACHTUNG: 'TEAMNAME' muss von Ihnen angepasst werden -->
-	<groupId>htwb.ai.TEAMNAME</groupId>
+	<groupId>htwb.ai.railey</groupId>
 	<artifactId>songsservlet</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -42,6 +42,16 @@
             <version>5.0.1.RELEASE</version>
             <scope>test</scope>
         </dependency>
+       	<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.9.8</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.json</groupId>
+    		<artifactId>json</artifactId>
+    		<version>20190722</version>
+		</dependency>
         <!-- 
         mockServletResponse.setContentType() needs 
         org/springframework/http/MediaType 
@@ -56,7 +66,7 @@
 	</dependencies>
 	<build>
 	    <!-- ACHTUNG: 'TEAMNAME' muss von Ihnen angepasst werden -->
-		<finalName>songsservlet-TEAMNAME</finalName>
+		<finalName>songsservlet-railey</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

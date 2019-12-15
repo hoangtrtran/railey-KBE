@@ -1,15 +1,12 @@
-package htwb.ai.TEAMNAME.api;
-
+package htwb.ai.railey.services;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.apache.commons.io.IOUtils;
 
 @Path("/version")
@@ -25,6 +22,6 @@ public class GitVersionService {
             gitVersion = "Could not load git.properties, check logs!";
             e.printStackTrace();
         }
-            return Response.ok(gitVersion).build();
+        return Response.ok(gitVersion).build();
     }
 }

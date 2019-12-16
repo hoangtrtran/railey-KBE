@@ -4,9 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="user")
+@XmlRootElement(name="user")
 public class User {
 	@Id
 	@Column (name = "userId")
@@ -21,6 +23,17 @@ public class User {
 	@Column (name = "lastName")
 	String lastName;
 	
+	public User() {
+		super();
+	}
+	
+	public User(String userId, String key, String firstName, String lastName) {
+		super();
+		this.userId = userId;
+		this.key = key;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 	public String getUserId() {
 		return userId;

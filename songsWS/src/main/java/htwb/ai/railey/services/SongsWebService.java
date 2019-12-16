@@ -70,9 +70,9 @@ public class SongsWebService {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response createSong(Song song) {
 		try {
-			if (song.getTitle() == null || song.getTitle().isEmpty() 
-					|| song.getArtist() == null || song.getArtist().isEmpty()
-					|| song.getLabel() == null || song.getLabel().isEmpty()
+			if (song.getTitle() == null || song.getTitle().trim().isEmpty() 
+					|| song.getArtist() == null || song.getArtist().trim().isEmpty()
+					|| song.getLabel() == null || song.getLabel().trim().isEmpty()
 					|| song.getReleased() == null) {
 				return Response.status(400).build();
 			}
@@ -104,9 +104,9 @@ public class SongsWebService {
 			if (!song.getId().toString().equals(id.toString()))
 				return Response.status(400).entity("Song id in payload and URL must be the same.").build();
 			
-			if (song.getTitle() == null || song.getTitle().isEmpty() 
-					|| song.getArtist() == null || song.getArtist().isEmpty()
-					|| song.getLabel() == null || song.getLabel().isEmpty()
+			if (song.getTitle() == null || song.getTitle().trim().isEmpty() 
+					|| song.getArtist() == null || song.getArtist().trim().isEmpty()
+					|| song.getLabel() == null || song.getLabel().trim().isEmpty()
 					|| song.getReleased() == null) {
 				return Response.status(400).build();
 			}

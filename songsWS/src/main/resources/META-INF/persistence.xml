@@ -26,11 +26,11 @@
             
             <!-- Connection pool properties -->
             <property name="hibernate.c3p0.min_size" value="1"/>
-            <property name="hibernate.c3p0.max_size" value="10"/>
+            <property name="hibernate.c3p0.max_size" value="50"/>
             
             <!-- in seconds:  When an idle connection is removed from the pool
                  Hibernate default: 0, never expire. -->
-            <property name="hibernate.c3p0.timeout" value="1800"/> 
+            <property name="hibernate.c3p0.timeout" value="5"/> 
             
             <!--  Number of prepared statements that will be cached. 
                   Hibernate default: 0 , caching is disable. -->

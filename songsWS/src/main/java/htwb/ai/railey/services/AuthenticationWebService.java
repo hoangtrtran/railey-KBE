@@ -31,14 +31,14 @@ public class AuthenticationWebService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response getAuth(@QueryParam("userId") String userId, @QueryParam("key") String key) throws IOException {
     	if (!authenticator.login(userId, key)) {
-        	return Response.status(400).entity("Either user Id or key was not corrected or existed").build();
+        	return Response.status(401).entity("Either user Id or key was not corrected or existed").build();
         }
         else {
         	String newToken = this.authenticator.generateToken();
         	if (newToken != null) {
         		return Response.ok(newToken).build();
         	}
-        	else return Response.status(400).entity("Cannot generate token.").build();
+        	else return Response.status(401).entity("Cannot generate token.").build();
         	
         }
     }

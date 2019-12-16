@@ -67,7 +67,7 @@ public class SongsWebServiceTest extends JerseyTest{
         Response response = target("/songs/12").request().header("Authorization", "hellonewday").put(Entity.json(createNewSongToBePut()));
         Assert.assertEquals(204, response.getStatus());
 	}
-	/*
+	
 	@Test
 	public void putXmlSongReturn204() {
         Response response = target("/songs/12").request().header("Authorization", "hellonewday").put(Entity.xml(createNewSongToBePut()));
@@ -234,6 +234,6 @@ public class SongsWebServiceTest extends JerseyTest{
 	public void deleteSongUnautorisedReturn401() {
         Response response = target("/songs/whatthehell").request().header("Authorization", "shutup").delete();
         Assert.assertEquals(401, response.getStatus());
-	}*/
+	}
 	
 }

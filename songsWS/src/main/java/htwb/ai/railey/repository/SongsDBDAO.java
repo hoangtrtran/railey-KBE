@@ -163,6 +163,17 @@ public class SongsDBDAO implements SongsDAO {
         return song;
     }
 	
+	@Override
+	public boolean isSongExisted(Song song) {
+		List<Song> songs = getAllSongs();
+		for (Song s : songs) {
+			if (s.toString().equals(song.toString())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
     // Freigabe der EMF am Ende der Applikation
     public void done() {
         emf.close();

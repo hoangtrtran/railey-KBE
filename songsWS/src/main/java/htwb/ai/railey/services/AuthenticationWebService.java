@@ -34,7 +34,7 @@ public class AuthenticationWebService {
         	return Response.status(401).entity("Either user Id or key was not corrected or existed").build();
         }
         else {
-        	String newToken = this.authenticator.generateToken();
+        	String newToken = this.authenticator.generateToken(userId);
         	if (newToken != null) {
         		return Response.ok(newToken).build();
         	}

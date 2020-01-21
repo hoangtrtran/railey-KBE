@@ -5,11 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
 
 @Entity
 @Table(name="song")
 @XmlRootElement(name="song")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +30,7 @@ public class Song {
 
 	@Column (name = "released")
 	private Integer released;
-	
+
 	public Song() {
 		super();
 	}

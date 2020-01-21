@@ -1,8 +1,8 @@
 package htwb.ai.railey.repository;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.inject.Inject;
@@ -15,13 +15,13 @@ import htwb.ai.railey.storage.IAuthenticator;
 public class Authenticator implements IAuthenticator {
 	
 	private EntityManagerFactory emf;
-    private List<String> tokenList; 
+    private Map<String, String> userTokenMap; 
     
     @Inject
     public Authenticator(EntityManagerFactory emf) {
     	this.emf = emf; // = Persistence.createEntityManagerFactory(persistenceUnit);
-    	this.tokenList = new LinkedList<>();
-    	tokenList.add("hellonewday"); //for test purpose
+    	this.userTokenMap = new HashMap<>();
+    	userTokenMap.put("testuser", "hellonewday"); //for test purpose
     }
 
     @Override
@@ -57,26 +57,54 @@ public class Authenticator implements IAuthenticator {
      */
     @Override
     public boolean authenticate(String authToken) {
-    	for (String token : tokenList) {
-    		if (token.equals(authToken)) {
-    			return true;
-    		}
+    	
+    	for (Map.Entry<String, String> userToken : userTokenMap.entrySet()) {
+    	    if (userToken.getValue().equals(authToken)) {
+    	    	return true;
+    	    };
     	}
+    	
     	return false;
     }
     
     @Override
-    public String generateToken() {
+    public String generateToken(String userId) {
 		try {
 			KeyGenerator keyGen = KeyGenerator.getInstance("AES");
 			keyGen.init(256);
 	    	SecretKey secretKey = keyGen.generateKey();
 	    	String encodedKey = Base64.getEncoder().encodeToString(secretKey.getEncoded()); //Secret Key to String
-	    	tokenList.add(encodedKey);
+	    	this.userTokenMap.put(userId, encodedKey);
 	    	return encodedKey;
 		} catch (NoSuchAlgorithmException e) {
 			return null;
 		}
+    }
+    
+    @Override
+    public String getUserId(String authToken) {
+    	for (Map.Entry<String, String> userToken : userTokenMap.entrySet()) {
+    	    if (userToken.getValue().equals(authToken)) {
+    	    	return userToken.getKey();
+    	    };
+    	}
+    	
+    	return null;
+    }
+    
+    @Override
+    public boolean isUserTheOwner(String userId, String authToken) {
+    	if (isUserExisted(userId) && userTokenMap.get(userId).equals(authToken))
+    		return true;
+    	else return false;
+    	
+    }
+    
+    @Override
+    public boolean isUserExisted(String userId) {
+    	if (userTokenMap.containsKey(userId))
+    		return true;
+    	else return false;
     }
     
     /**

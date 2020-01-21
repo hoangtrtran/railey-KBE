@@ -6,6 +6,7 @@
         
         <class>htwb.ai.railey.model.Song</class>
         <class>htwb.ai.railey.model.User</class>
+        <class>htwb.ai.railey.model.SongList</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>

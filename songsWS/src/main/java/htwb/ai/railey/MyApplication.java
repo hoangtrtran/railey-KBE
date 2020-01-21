@@ -13,7 +13,8 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import htwb.ai.railey.di.DependencyBinder;
+
+import htwb.ai.railey.dependency_injection.DependencyBinder;
 import htwb.ai.railey.model.Song;
 import htwb.ai.railey.repository.SongsDBDAO;
 

@@ -1,8 +1,11 @@
 package htwb.ai.railey.model;
 
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,6 +25,9 @@ public class User {
 	
 	@Column (name = "lastName")
 	String lastName;
+	
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "owner")
+	private Set<SongList> songLists;
 	
 	public User() {
 		super();
@@ -59,5 +65,11 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	@Override
+    public String toString() {
+        return "User [userId = " + userId + ", key = " + key + ", first name = " + firstName 
+        		+ ", last name =" + lastName + "]";
+    }
 
 }

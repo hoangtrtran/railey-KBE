@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<songlist>
+    <name>TestsPublic</name>
+    <isPrivate>false</isPrivate>
+        <songs>
+        <song>
+		<id>1</id>
+		<title>MacArthur Park</title>
+		<artist>Richard Harris</artist>
+		<label>Dunhill Records</label>
+		<released>1968</released>
+	</song>
+	<song>
+		<id>10</id>
+		<title>7 Years</title>
+		<artist>Lukas Graham</artist>
+		<label>NEEEEEEWWWWW</label>
+		<released>2019</released>
+	</song>
+	</songs>
+</songlist>

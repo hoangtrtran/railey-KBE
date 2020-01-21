@@ -10,5 +10,6 @@ public interface SongListsDAO {
 	SongList getSongListById(Integer id);
 	Integer addSongList(SongList songList);
 	User getUserWithId(String userId);
+	SongList deleteSongList(Integer id);
 	
 }

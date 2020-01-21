@@ -138,5 +138,39 @@ public class SongListsWebService {
 		}   
 	}
 	
+	/**
+	 * DELETE http://localhost:8080/songsWS-railey/rest/songLists/1
+	 * Status NOT_FOUND when the the song list does not have the id.
+	 * Status 403 when the user is not the owner
+	 * Status 400 
+	 * @param id
+	 * @param authToken
+	 * @return
+	 */
+	@DELETE
+    @Path("/{id}")
+    public Response deleteSongList(@PathParam("id") Integer id, @HeaderParam("Authorization") String authToken) {
+		try {
+			SongList getSongList = songListsDAO.getSongListById(id);
+			if (getSongList == null) {
+				return Response.status(Response.Status.NOT_FOUND).entity("Song List Id not found").build();
+			}
+			
+			boolean isUserTheOwner = authenticator.isUserTheOwner(getSongList.getOwner().getUserId(), authToken);
+			
+			if (!isUserTheOwner) {
+				return Response.status(403).entity("Only the owner of this song list allowed to delete.").build();
+			}
+			
+			if (songListsDAO.deleteSongList(id) == null) {
+				return Response.status(400).entity("Song list cannot be deleted").build();
+			}
+			else return Response.status(204).entity("Delete song list succeeded").build();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(400).build();
+		}  	
+    }
 	
 }

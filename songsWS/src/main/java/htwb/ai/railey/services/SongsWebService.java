@@ -118,6 +118,15 @@ public class SongsWebService {
 			return Response.status(400).build();
 		}
     }
-	
-	
+	@DELETE
+	@Path("/{id}")
+	public Response deleteSong(@PathParam("id") Integer id) {
+		return Response.status(405).entity("You cannot delete the song.").build();
+		/*
+		if (songsDAO.deleteSong(id) == null) {
+			return Response.status(400).entity("Song cannot be deleted").build();
+		}
+		else return Response.status(204).entity("Delete song succeeded").build();
+	}*/
+	}
 }

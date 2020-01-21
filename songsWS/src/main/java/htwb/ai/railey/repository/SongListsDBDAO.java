@@ -121,5 +121,28 @@ public class SongListsDBDAO implements SongListsDAO {
         }
         return songId;
     }
-
+	
+	@Override
+	public SongList deleteSongList(Integer id) throws PersistenceException {
+        EntityManager em = emf.createEntityManager();
+        SongList songList;
+        EntityTransaction transaction = null;
+        try {
+            transaction = em.getTransaction();
+            transaction.begin();
+            // find SongList with id 
+            songList = em.find(SongList.class, id);
+            if (songList != null) {
+                em.remove(songList);
+                transaction.commit();
+            }
+        } catch (Exception e) {
+            songList = null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return songList;
+    }
 }

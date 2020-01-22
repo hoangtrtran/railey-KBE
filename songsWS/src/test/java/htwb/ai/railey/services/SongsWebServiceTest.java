@@ -207,7 +207,7 @@ public class SongsWebServiceTest extends JerseyTest{
         Response response = target("/songs").request().header("Authorization", "gaugaugau").post(Entity.xml(createNewSongToBePut()));
         Assert.assertEquals(401, response.getStatus());
 	}
-	
+	/*
 	// ------------ DELETE -------------- first post a new Song and then delete that same song
 	@Test
 	public void deleteSongReturn204() {
@@ -223,7 +223,7 @@ public class SongsWebServiceTest extends JerseyTest{
         Assert.assertEquals(400, response.getStatus());
 	}
 	
-	
+
 	@Test
 	public void deleteSongIdNotNumberReturn404() {
         Response response = target("/songs/whatthehell").request().header("Authorization", "hellonewday").delete();
@@ -234,6 +234,6 @@ public class SongsWebServiceTest extends JerseyTest{
 	public void deleteSongUnautorisedReturn401() {
         Response response = target("/songs/whatthehell").request().header("Authorization", "shutup").delete();
         Assert.assertEquals(401, response.getStatus());
-	}
+	}*/
 	
 }
